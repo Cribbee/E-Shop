@@ -2,6 +2,7 @@
 A project of E-commerce which is based on DjangoRestFramework.
 
 Note about Django-RestFramework：
+
 一、配置虚拟环境进行版本控制
 
 1、安装 virtualenv：sudo pip install python-virtualenv
