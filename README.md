@@ -20,6 +20,9 @@ pip install django
 pip install djangorestframework
 pip install markdown       # Markdown support for the browsable API.
 pip install django-filter  # Filtering support
+pip install coreapi           #支持使用drf文档
+pip install django-guardian 
+pip inastall django-crispy-forms 
 
 三、创建Django 项目
 
@@ -72,7 +75,39 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 ￼
 所得到的效果：可以在引用apps和extra_apps下的对象时候可以直接import
 从而得到基本目录
---------------------------------2018年03月29日22:42:49------------------------------------------------
+
+-------------------2018年03月29日22:42:49---------------------------
+
+Restful Api 操作标准：http://www.ruanyifeng.com/blog/2014/05/restful_api.html
+
+-------------------2018年03月30日22:47:29---------------------------
+
+
+A many-to-one relationship. Requires two positional arguments: the class to which the model is related and the on_delete option.
+
+and the ForeignKey.on_delete documentation:
+
+When an object referenced by a ForeignKey is deleted, Django will emulate the behavior of the SQL constraint specified by the on_delete argument.
+
+Pick one from the available options (models.CASCADE, models.PROTECT, models.SET_NULL, models.SET_DEFAULT, models.SET() or models.DO_NOTHING)
+
+The parameter is required as of Django 2.0. In previous Django versions, the argument was optional and defaulted to models.CASCADE.
+
+If you were used to the old behaviour, just set it to the old default:
+
+board = models.ForeignKey(Board, models.CASCADE, related_name='topics')
+starter = models.ForeignKey(User, models.CASCADE, related_name='topics')
+
+ps. https://docs.djangoproject.com/en/2.0/ref/models/fields/#django.db.models.ForeignKey.on_delete
+
+
+-------------------2018年03月31日23:50:32---------------------------
+
+
+
+
+
+
 
 ￼
 ￼
