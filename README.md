@@ -99,6 +99,7 @@ board = models.ForeignKey(Board, models.CASCADE, related_name='topics')
 starter = models.ForeignKey(User, models.CASCADE, related_name='topics')
 
 ps. https://docs.djangoproject.com/en/2.0/ref/models/fields/#django.db.models.ForeignKey.on_delete
+    http://www.django-rest-framework.org/
 
 
 -------------------2018年03月31日23:50:32---------------------------
