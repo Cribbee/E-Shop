@@ -102,7 +102,128 @@ ps. https://docs.djangoproject.com/en/2.0/ref/models/fields/#django.db.models.Fo
     http://www.django-rest-framework.org/
 
 
--------------------2018年03月31日23:50:32---------------------------
+-------------------2018年03月31日23:50:32------------------------
+
+API Guide
+DjangoFilterBackend
+The django-filter library includes a DjangoFilterBackend class which supports highly customizable field filtering for REST framework.
+
+To use DjangoFilterBackend, first install django-filter. Then add django_filters to Django's INSTALLED_APPS
+
+pip install django-filter
+You should now either add the filter backend to your settings:
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+}
+Or add the filter backend to an individual View or ViewSet.
+
+from django_filters.rest_framework import DjangoFilterBackend
+
+class UserListView(generics.ListAPIView):
+    ...
+    filter_backends = (DjangoFilterBackend,)
+If all you need is simple equality-based filtering, you can set a filter_fields attribute on the view, or viewset, listing the set of fields you wish to filter against.
+
+class ProductList(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('category', 'in_stock')
+This will automatically create a FilterSet class for the given fields, and will allow you to make requests such as:
+
+http://example.com/api/products?category=clothing&in_stock=True
+For more advanced filtering requirements you can specify a FilterSet class that should be used by the view. You can read more about FilterSets in the django-filter documentation. It's also recommended that you read the section on DRF integration.
+
+SearchFilter
+The SearchFilter class supports simple single query parameter based searching, and is based on the Django admin's search functionality.
+
+When in use, the browsable API will include a SearchFilter control:
+
+Search Filter
+
+The SearchFilter class will only be applied if the view has a search_fields attribute set. The search_fields attribute should be a list of names of text type fields on the model, such as CharField or TextField.
+
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('username', 'email')
+This will allow the client to filter the items in the list by making queries such as:
+
+http://example.com/api/users?search=russell
+You can also perform a related lookup on a ForeignKey or ManyToManyField with the lookup API double-underscore notation:
+
+search_fields = ('username', 'email', 'profile__profession')
+By default, searches will use case-insensitive partial matches. The search parameter may contain multiple search terms, which should be whitespace and/or comma separated. If multiple search terms are used then objects will be returned in the list only if all the provided terms are matched.
+
+The search behavior may be restricted by prepending various characters to the search_fields.
+
+'^' Starts-with search.
+'=' Exact matches.
+'@' Full-text search. (Currently only supported Django's MySQL backend.)
+'$' Regex search.
+For example:
+
+search_fields = ('=username', '=email')
+By default, the search parameter is named 'search', but this may be overridden with the SEARCH_PARAM setting.
+
+For more details, see the Django documentation.
+
+OrderingFilter
+The OrderingFilter class supports simple query parameter controlled ordering of results.
+
+Ordering Filter
+
+By default, the query parameter is named 'ordering', but this may by overridden with the ORDERING_PARAM setting.
+
+For example, to order users by username:
+
+http://example.com/api/users?ordering=username
+The client may also specify reverse orderings by prefixing the field name with '-', like so:
+
+http://example.com/api/users?ordering=-username
+Multiple orderings may also be specified:
+
+http://example.com/api/users?ordering=account,username
+Specifying which fields may be ordered against
+It's recommended that you explicitly specify which fields the API should allowing in the ordering filter. You can do this by setting an ordering_fields attribute on the view, like so:
+
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = ('username', 'email')
+This helps prevent unexpected data leakage, such as allowing users to order against a password hash field or other sensitive data.
+
+If you don't specify an ordering_fields attribute on the view, the filter class will default to allowing the user to filter on any readable fields on the serializer specified by the serializer_class attribute.
+
+If you are confident that the queryset being used by the view doesn't contain any sensitive data, you can also explicitly specify that a view should allow ordering on any model field or queryset aggregate, by using the special value '__all__'.
+
+class BookingsListView(generics.ListAPIView):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = '__all__'
+Specifying a default ordering
+If an ordering attribute is set on the view, this will be used as the default ordering.
+
+Typically you'd instead control this by setting order_by on the initial queryset, but using the ordering parameter on the view allows you to specify the ordering in a way that it can then be passed automatically as context to a rendered template. This makes it possible to automatically render column headers differently if they are being used to order the results.
+
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = ('username', 'email')
+    ordering = ('username',)
+The ordering attribute may be either a string or a list/tuple of strings.
+
+
+
+-------------------2018-04-01 22:26:49------------------------
+
+
+
 
 
 
