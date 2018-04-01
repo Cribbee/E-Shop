@@ -25,7 +25,7 @@ class UserProfile(AbstractUser):
 
     #__str__(self)这个方法定义了当object调用str()时应该返回的值。
     def __str__(self):
-        return self.name
+        return self.username
 
 
 class VerifyCode(models.Model):

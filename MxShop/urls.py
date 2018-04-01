@@ -20,9 +20,18 @@ from django.conf.urls import url
 from MxShop.settings import MEDIA_ROOT
 from django.views.static import serve
 from rest_framework.documentation import include_docs_urls
+from rest_framework.routers import DefaultRouter
 
 #from goods.views_base import GoodsListView
-from goods.views import GoodsListView
+#from goods.views import GoodsListView
+from goods.views import GoodsViewSet
+
+router = DefaultRouter()
+
+#  配置goods的url
+router.register(r'goods', GoodsViewSet)
+
+
 
 urlpatterns = [
     #url(r'^xadmin/', xadmin.site.urls),
@@ -30,7 +39,8 @@ urlpatterns = [
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
 
     #商品的列表页
-    url(r'goods/$', GoodsListView.as_view(), name="goods-list"),
+    #  url(r'goods/$', GoodsListView.as_view(), name="goods-list"),
+    url(r'^',include(router.urls)),
 
     #这里有坑，$符号不能出现
     url(r'docs/', include_docs_urls(title="生鲜电商平台"))

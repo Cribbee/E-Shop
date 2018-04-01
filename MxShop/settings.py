@@ -29,7 +29,7 @@ SECRET_KEY = '044+prl(&!95#me5)d6q6exx+v=+(r7urs)1e39pmftbf7=po='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 #把设置重载的modle引入，这样就会替换系统用户，利用django.contrib.auth
 AUTH_USER_MODEL = 'users.UserProfile'
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'crispy_forms',
+    'django_filters',
     'guardian',
     'DjangoUeditor',
     'users',
@@ -140,6 +141,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#使django能够找到media文件夹，存取图片,setting.py中设置完后，还要到url.py进行设置
+#  使django能够找到media文件夹，存取图片,setting.py中设置完后，还要到url.py进行设置
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,"media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+import apps.goods
+#  rest_framework有关配置，例如分页
+REST_FRAMEWORK = {
+        # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+        # 'PAGE_SIZE': 10,
+
+}
