@@ -222,6 +222,33 @@ The ordering attribute may be either a string or a list/tuple of strings.
 
 -------------------2018-04-01 22:26:49------------------------
 
+requirement:
+django
+pillow
+mysqlclient
+djangorestframework-jwt
+djangorestframework
+markdown
+django-filter
+django-crispy-forms
+django-reversion
+django-formtools
+future
+httplib2
+six
+requests
+coreapi
+django-cors-headers
+xlwt
+xlsxwriter
+drf-extensions
+django-redis
+pycryptodome
+raven
+
+-------------------2018-04-03 23:06:44------------------------
+
+
 
 
 
