@@ -37,7 +37,7 @@ class GoodsPagination(PageNumberPagination):
     """
     page_size = 10
     page_size_query_param = 'page_size'
-    page_query_param = "p"
+    page_query_param = "page"
     max_page_size = 100
 
 # class GoodsListView(generics.ListAPIView):#  等级2的generics.ListAPIView
