@@ -14,7 +14,23 @@ from goods.models import Goods,  GoodsCategory
 #     add_time = serializers.DateTimeField(default=datetime.now)
 
 
+class CategorySerializer3(serializers.ModelSerializer):
+    class Meta:
+        model = GoodsCategory
+        fields = "__all__"
+
+
+class CategorySerializer2(serializers.ModelSerializer):
+    sub_cat = CategorySerializer3(many=True)
+
+    class Meta:
+        model = GoodsCategory
+        fields = "__all__"
+
+
 class CategorySerializer(serializers.ModelSerializer):
+    sub_cat = CategorySerializer2(many=True)  # 由于一个主类别下面对应多个2级类，因此不要漏写many=True
+
     class Meta:
         model = GoodsCategory
         fields = "__all__"
