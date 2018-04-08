@@ -1,5 +1,3 @@
-from .serializers import GoodsSerializer
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
@@ -9,8 +7,9 @@ from rest_framework import mixins
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .models import Goods
+from .models import Goods, GoodsCategory
 from .filters import GoodsFilter
+from .serializers import GoodsSerializer, CategorySerializer
 # Create your views here.
 
 
@@ -61,8 +60,17 @@ class GoodsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     #  filter_fields = ('shop_price')#  这里是django自带过滤功能需要的字段，需要filters.py的辅助,如果继承对象就不需要这条了
 
     filter_class = GoodsFilter
-    search_fields = ( 'goods_brief', 'goods_desc',)
+    search_fields = ('name', 'goods_brief', 'goods_desc',)
     ordering_fields = ('sold_num', 'add_time')
+
+
+class CategoryViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    """
+    List:
+        商品分页列表数据
+    """
+    queryset = GoodsCategory.objects.all()
+    serializer_class = CategorySerializer
 
 
 

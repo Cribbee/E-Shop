@@ -5,7 +5,7 @@ __create_at__ = 2018 / 3 / 31
 from rest_framework import serializers
 from datetime import datetime
 
-from goods.models import Goods,GoodsCategory
+from goods.models import Goods,  GoodsCategory
 
 # class GoodsSerializer(serializers.Serializer):
 #     name = serializers.CharField(required=True, max_length=100)

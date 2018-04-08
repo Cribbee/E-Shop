@@ -24,12 +24,17 @@ from rest_framework.routers import DefaultRouter
 
 #from goods.views_base import GoodsListView
 #from goods.views import GoodsListView
-from goods.views import GoodsViewSet
+from goods.views import GoodsViewSet, CategoryViewSet
 
 router = DefaultRouter()
 
 #  配置goods的url
-router.register(r'goods', GoodsViewSet)
+router.register(r'goods', GoodsViewSet, base_name="goods")
+
+#  配置categorys的url
+router.register(r'categorys', CategoryViewSet, base_name="categorys")
+
+
 
 
 
