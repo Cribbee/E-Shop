@@ -64,7 +64,7 @@ class GoodsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     ordering_fields = ('sold_num', 'add_time')
 
 
-class CategoryViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class CategoryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):  # RetrieveModelMixin可以帮助获取详情页信息
     """
     List:
         商品分页列表数据
