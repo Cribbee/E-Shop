@@ -31,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-#把设置重载的modle引入，这样就会替换系统用户，利用django.contrib.auth
+# 把设置重载的model引入，这样就会替换系统用户，利用django.contrib.auth
 AUTH_USER_MODEL = 'users.UserProfile'
 
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend', 'guardian.backends.ObjectPermissionBackend')
