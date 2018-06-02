@@ -6,6 +6,7 @@ from rest_framework import viewsets
 from rest_framework import mixins
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.authentication import TokenAuthentication
 
 from .models import Goods, GoodsCategory
 from .filters import GoodsFilter
@@ -56,6 +57,7 @@ class GoodsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
     pagination_class = GoodsPagination
+    authentication_classes = (TokenAuthentication, )
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     #  filter_fields = ('shop_price')#  这里是django自带过滤功能需要的字段，需要filters.py的辅助,如果继承对象就不需要这条了
 
