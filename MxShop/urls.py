@@ -21,6 +21,7 @@ from MxShop.settings import MEDIA_ROOT
 from django.views.static import serve
 from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken import views
 
 #from goods.views_base import GoodsListView
 #from goods.views import GoodsListView
@@ -45,9 +46,11 @@ urlpatterns = [
 
     #商品的列表页
     #  url(r'goods/$', GoodsListView.as_view(), name="goods-list"),
-    url(r'^',include(router.urls)),
+    url(r'^', include(router.urls)),
 
     #这里有坑，$符号不能出现
-    url(r'docs/', include_docs_urls(title="生鲜电商平台"))
+    url(r'docs/', include_docs_urls(title="生鲜电商平台")),
+
+    url(r'^api-token-auth/', views.obtain_auth_token)
 
 ]
