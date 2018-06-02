@@ -539,7 +539,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527953089649</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="采用drf信号量方法来实现POST_SAVE">
+      <created>1527953209697</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1527953209697</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView">
@@ -601,7 +608,8 @@
     <MESSAGE value="配置token" />
     <MESSAGE value="取消全局的token验证配置，而已接口的形式来配置" />
     <MESSAGE value="完成用户JWT认证，以及viewset的序列化配置" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成用户JWT认证，以及viewset的序列化配置" />
+    <MESSAGE value="采用drf信号量方法来实现POST_SAVE" />
+    <option name="LAST_COMMIT_MESSAGE" value="采用drf信号量方法来实现POST_SAVE" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

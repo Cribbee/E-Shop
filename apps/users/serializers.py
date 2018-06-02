@@ -31,11 +31,11 @@ class UserRegSerializer(serializers.ModelSerializer):
         }
     )
 
-    # def create(self, validated_data):
-    #     user = super(UserRegSerializer, self).create(validated_data=validated_data)
-    #     user.set_password(validated_data["password"])
-    #     user.save()
-    #     return user
+    def create(self, validated_data):
+        user = super(UserRegSerializer, self).create(validated_data=validated_data)
+        user.set_password(validated_data["password"])
+        user.save()
+        return user
 
     class Meta:
         model = User
