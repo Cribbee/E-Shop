@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'django_filters',
     'guardian',
     'DjangoUeditor',
-    'users',
+    'users.apps.UsersConfig',
     'goods',
     'trade',
     'user_operation',
